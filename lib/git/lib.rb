@@ -676,7 +676,9 @@ module Git
 
       out = nil
       if chdir && (Dir.getwd != path)
-        Dir.chdir(path) { out = run_command(git_cmd, &block) } 
+        puts "correct invovation\n"
+        Dir.chdir(path)  
+        out = run_command(git_cmd, &block) 
       else
         out = run_command(git_cmd, &block)
       end
@@ -733,6 +735,7 @@ module Git
     end
     
     def run_command(git_cmd, &block)
+      puts "Current directory is #{Dir.pwd}"
       if block_given?
         IO.popen(git_cmd, &block)
       else
